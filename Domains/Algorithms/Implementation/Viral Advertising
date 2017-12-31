@@ -1,0 +1,18 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int n, like = 2, prevLike = 2;
+    cin >> n;
+    for(int i = 1; i < n; i++){
+        prevLike = (prevLike * 3)/2;
+        like += prevLike; 
+    }
+    cout<<like<<endl;
+    return 0;
+}
