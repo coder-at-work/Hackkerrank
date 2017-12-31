@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+#include <sstream>
+
+using namespace std;
+
+string solve(int year){
+    string date = "";
+    stringstream ss;
+    ss << year;
+    string yearStr = ss.str();
+    if(year < 1918) {
+        if((year % 4) == 0) {
+            date = "12";
+        } else {
+            date = "13";
+        }
+    } else if(year == 1918) {
+        date = "26";
+    } else {
+        if((year % 400) == 0) {
+            date = "12";
+        } else if((year % 100) == 0) {
+            date = "13";
+        } else if((year % 4) == 0) {
+            date = "12";
+        } else {
+            date = "13";
+        }
+    }
+    return(date+".09."+yearStr);
+}
+
+int main() {
+    int year;
+    cin >> year;
+    string result = solve(year);
+    cout << result << endl;
+    return 0;
+}
