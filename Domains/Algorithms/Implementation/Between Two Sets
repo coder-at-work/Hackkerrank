@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long gcd(long x, long y) {
+    if(x == 0) {
+        return(y);
+    } else {
+        return(gcd(y%x, x));
+    }
+}
+
+long findLCM(long x, long y) {
+    return((x*y)/gcd(x,y));   
+}
+
+int main() 
+{
+    int x, y, min = 101;
+    cin>>x>>y;
+    long a[x], b[y];
+    long lcm;
+    for(int i = 0; i < x; i++) {
+        cin>>a[i];
+    }
+    for(int i = 0; i < y; i++) {
+        cin>>b[i];
+        if(b[i] < min) {
+            min = b[i];
+        }
+    }
+    lcm = a[0];
+    for(int i =1; i < x; i++) {
+        lcm = findLCM(lcm, a[i]);
+    }
+    int j = 1, count = 0, initLCM = lcm;
+    while(lcm <= min) {
+        int flag = 0;
+        j++;
+        for(int i = 0; i < y; i++) {
+            if((b[i] % lcm) == 0) {
+                continue;
+            } else {
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0) {
+            count++;
+        }
+        lcm = initLCM * j;
+    }
+    cout<<count<<endl;
+}
