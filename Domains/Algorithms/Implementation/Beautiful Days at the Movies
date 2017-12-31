@@ -1,0 +1,31 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <sstream>
+using namespace std;
+
+int reverseNumber(int x) {
+    int num = 0;
+    while(x != 0) {
+        int rem = x % 10;
+        x = x / 10;
+        num = (10*num) + rem;
+    }
+    return(num);
+}
+
+
+int main() {
+    int a, j, k, count = 0;
+    cin>>a>>j>>k;
+    for(int i = a; i <= j; i++) {
+        int revNum = reverseNumber(i);
+        if(abs(revNum - i) % k == 0) {
+            count++;
+        }
+    }
+    cout<<count<<endl;
+    return 0;
+}
