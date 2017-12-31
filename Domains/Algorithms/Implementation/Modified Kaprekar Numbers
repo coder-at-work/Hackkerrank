@@ -1,0 +1,33 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int sepAndSum(long num, int digits) {
+    long div = (long)(pow(10, digits));
+    long lPart = num/div, rPart = num%div;
+    return(lPart + rPart);
+}
+
+int main() {
+    int a, b, flag = 0;
+    cin>>a>>b;
+    for(int i = a; i <= b;i++) {
+        int x = i, noDigit = 0;
+        while(x != 0) {
+            noDigit++;
+            x = x/10;
+        }
+        long sq = (long)(pow(i, 2));
+        if(sepAndSum(sq, noDigit) == i) {
+            flag = 1;
+            cout<<i<<" ";
+        }
+    }
+    if(flag == 0) {
+        cout<<"INVALID RANGE"<<endl;
+    }
+    return 0;
+}
