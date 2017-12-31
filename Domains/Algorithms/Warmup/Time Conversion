@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#include <sstream>
+
+using namespace std;
+
+string timeConversion(string s) {
+    int hours;
+    string h = s.substr(0,2);
+    string m = s.substr(3,2);
+    string sec = s.substr(6,2);
+    if((h == "12") && s.find("A")!=std::string::npos)
+        return("00:"+m+":"+sec);
+    else if((h == "12") && s.find("P")!=std::string::npos)
+        return("12:"+m+":"+sec);
+    else if(s.find("A")!=std::string::npos)
+        return(h+":"+m+":"+sec);
+    else
+    {
+        stringstream ss(h);
+        ss >> hours;
+        hours+=12;
+        stringstream st;
+        st<<hours;
+        string hrs = st.str();
+        return(hrs+":"+m+":"+sec);
+    }
+}
+
+int main() {
+    string s;
+    cin >> s;
+    string result = timeConversion(s);
+    cout << result << endl;
+    return 0;
+}
