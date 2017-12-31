@@ -1,0 +1,49 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+
+int main(){
+    int n, x, min = 1001;
+    cin >> n;
+    map<int, int> m;
+    map<int, int> :: iterator it;
+    cin>>x;
+    m.insert(pair<int, int> (x, 0));
+    for(int i = 1; i < n; i++) {
+        cin>>x;
+        it = m.find(x);
+        if(it == m.end()) {
+            m.insert(pair<int, int> (x, i));
+        } else {
+            if((i - it->second) < min)
+                min = i - it->second;
+            it->second = i;
+        }
+    }
+    if(min == 1001)
+        min = -1;
+    cout<<min<<endl;
+    return 0;
+}
