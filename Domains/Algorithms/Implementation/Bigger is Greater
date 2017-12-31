@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+string rearrangeChars(string input, int pos) {
+    string ans = "", firstPart, lastPart;
+    char start = input.at(pos);
+    int min = 100000, minIndex = -1;
+    for(int i = pos + 1; i < input.length(); i++) {
+        char current = input.at(i);
+        int diff = current - start;
+        if(diff > 0 && diff < min) {
+            min = diff;
+            minIndex = i;
+        }
+    }
+    if(minIndex != -1) {
+        swap(input[pos], input[minIndex]);
+        firstPart = input.substr(0, pos+1);
+        lastPart = input.substr(pos+1);
+        char char_array[lastPart.length()+1];
+        strcpy(char_array, lastPart.c_str());
+        sort(char_array, char_array+lastPart.length());
+        string str(char_array);
+        lastPart = str;
+        ans = firstPart + lastPart;
+    } else {
+        ans = input;
+    }
+    return(ans);
+}
+
+int main() {
+    int test;
+    cin>>test;
+    while(test--)
+    {
+        int flag = 0;
+        string input;
+        cin>>input;
+        for(int i = input.length() - 2; i >= 0; i--) {
+            string newStr = rearrangeChars(input, i);
+            if(input.compare(newStr) == 0) {
+                continue;
+            } else {
+                flag = 1;
+                cout<<newStr<<endl;
+                break;
+            }
+        }
+        if(flag == 0) {
+            cout<<"no answer"<<endl;
+        }
+    }
+    return 0;
+}
