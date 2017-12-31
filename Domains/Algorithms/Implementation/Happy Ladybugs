@@ -1,0 +1,93 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+bool validityWithUnderscore(int arr[]) {
+    int flag = 0;
+    for(int i = 0; i < 26; i++) {
+        if(arr[i] == 1) {
+            flag = 1;
+            break;
+        }
+    }
+    return(flag == 0);
+}
+
+bool validityWithoutUnderscore(string b) {
+    int flag = 0;
+    for(int i = 0; i < b.length(); i++) {
+        if(i == 0) {
+            if(b.length() > 1 && b.at(i) == b.at(i+1)) {
+                continue;
+            } else {
+                flag = 1;
+                break;
+            }
+        } else if(i == (b.length() - 1)) {
+            if(b.at(i) == b.at(i-1))
+                continue;
+            else {
+                flag = 1;
+                break;
+            }
+        } else if((b.at(i) == b.at(i+1)) || (b.at(i) == b.at(i-1))) {
+            continue;
+        } else {
+            flag = 1;
+            break;
+        }
+    }
+    return(flag == 0);
+}
+
+int main(){
+    int Q;
+    cin >> Q;
+    for(int a0 = 0; a0 < Q; a0++){
+        string ans = "NO";
+        int n, flag = 0, arr[26];
+        cin >> n;
+        string b;
+        cin >> b;
+        for(int i = 0; i < 26; i++) {
+            arr[i] = 0;
+        }
+        for(int i = 0; i < b.length(); i++) {
+            if(flag == 0 && b.at(i) == '_') {
+                flag = 1;
+            } else {
+                arr[(int)(b.at(i) - 65)]++;
+            }
+        }
+        if(flag == 0) {
+            if(validityWithoutUnderscore(b))
+                ans = "YES";
+        } else {
+            if(validityWithUnderscore(arr))
+                ans = "YES";
+        }
+        cout<<ans<<endl;
+    }
+    return 0;
+}
