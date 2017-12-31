@@ -1,0 +1,40 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int check(string str1, string str2) {
+    int subjects = 0;
+    for(int i = 0; i < str1.length(); i++) {
+        if(str1.at(i) == '0' && str2.at(i) == '0') {
+            continue;
+        } else {
+            subjects++;
+        }
+    }
+    return(subjects);
+}
+int main(){
+    int n;
+    int m, subjects, max = 0, noTeams = 0;
+    cin >> n >> m;
+    vector<string> topic(n);
+    for(int topic_i = 0;topic_i < n;topic_i++){
+       cin >> topic[topic_i];
+    }
+    for(int i = 0; i < n-1; i++) {
+        for(int j = i+1; j <n; j++) {
+            subjects = check(topic[i], topic[j]);
+            if(subjects > max) {
+                noTeams = 1;
+                max = subjects;
+            } else if(subjects == max) {
+                noTeams++;
+            }
+        }
+    }
+    cout<<max<<endl<<noTeams<<endl;
+    return 0;
+}
