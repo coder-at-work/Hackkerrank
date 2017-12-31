@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+bool checkEntireGrid(vector<string> &G, vector<string> &P, int row, int column, int gridRow, int gridColumn) {
+    int flag = 0, default_column = column, default_row = row;
+    for(int i = 0; i < P.size(); i++) {
+        row = default_row + i;
+        column = default_column;
+        for(int j = 0; j < P[i].length(); j++) {
+            column = default_column + j;
+            if((row >= gridRow || column >= gridColumn) || G[row][column] != P[i][j]) {
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 1) {
+            break;
+        }
+    }
+    return(flag == 0);
+    
+}
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        int R;
+        int C;
+        cin >> R >> C;
+        vector<string> G(R);
+        for(int G_i = 0; G_i < R; G_i++){
+           cin >> G[G_i];
+        }
+        int r;
+        int c;
+        cin >> r >> c;
+        vector<string> P(r);
+        for(int P_i = 0; P_i < r; P_i++){
+           cin >> P[P_i];
+        }
+        
+        //Checking for the first match and if matched then transfer the control to another function to check whether the entire grid matches or not
+        int firstRow = 0, firstColumn = 0, flag = 0;
+        for(int i = 0; i < R; i++) {
+            for(int j = 0; j < C; j++) {
+                if(G[i].at(j) == P[firstRow][firstColumn]) {
+                    if(checkEntireGrid(G, P, i, j, R, C)) {
+                        flag = 1;
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            if(flag == 1) {
+                break;
+            }
+        }
+        if(flag == 1) {
+            cout<<"YES"<<endl;
+        } else {
+            cout<<"NO"<<endl;
+        }
+    }
+    return 0;
+}
