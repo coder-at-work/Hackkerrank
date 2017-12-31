@@ -1,0 +1,29 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        int n;
+        cin >> n;
+        int power = ceil(n/2.0);
+        unsigned long long int a = pow(2, power);
+        unsigned long long int b = (n != 0) ? (pow(2, power-1) - 1) : 0, answer;
+        if((n % 2) == 1) {
+            answer = a + 2*b;
+        } else {
+            answer = a + 2*b + 1;
+        }
+        if(n == 0) {
+            answer = 1;
+        }
+        cout<<answer<<endl;
+    }
+    return 0;
+}
