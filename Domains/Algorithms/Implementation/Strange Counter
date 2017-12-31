@@ -1,0 +1,39 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+
+int main(){
+    long t, total, counter;
+    cin >> t;
+    if(t >= 4) {
+        total = log2((t+2)/6) + 1;
+        total = 6*pow(2,total) - 2;
+        counter = total - t;
+    } else {
+        counter = 4 - t;
+    }
+    cout<<counter<<endl;
+    return 0;
+}
