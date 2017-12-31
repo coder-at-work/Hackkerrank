@@ -1,0 +1,26 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main(){
+    string s;
+    cin >> s;
+    int length = s.length(), lLimit = floor(sqrt(length)), rLimit = ceil(sqrt(length));
+    int row = lLimit, column = rLimit;
+    if(row*column < length) {
+        row = rLimit;
+    }
+    for(int i = 0; i < column; i++) {
+        int k = i;
+        while(k < length) {
+            cout<<s.at(k);
+            k += column;
+        }
+        cout<<" ";
+    }
+    return 0;
+}
