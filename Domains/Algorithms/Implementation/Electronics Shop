@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int getMoneySpent(vector < int > keyboards, vector < int > drives, int s){
+    int max_price, answer = -1, i, j;
+    sort(keyboards.begin(), keyboards.begin() + keyboards.size());
+    sort(drives.begin(), drives.begin() + drives.size());
+    for(i = keyboards.size() - 1, j = 0; i >= 0 ; i--) {
+        for(; j < drives.size(); j++) {
+            max_price = keyboards[i] + drives[j];
+            if(max_price > s)
+                break;
+            else if(max_price > answer)
+                answer = max_price;
+        }
+    }
+    return(answer);
+}
+
+int main() {
+    int s;
+    int n;
+    int m;
+    cin >> s >> n >> m;
+    vector<int> keyboards(n);
+    for(int keyboards_i = 0; keyboards_i < n; keyboards_i++){
+       cin >> keyboards[keyboards_i];
+    }
+    vector<int> drives(m);
+    for(int drives_i = 0; drives_i < m; drives_i++){
+       cin >> drives[drives_i];
+    }
+    //  The maximum amount of money she can spend on a keyboard and USB drive, or -1 if she can't purchase both items
+    int moneySpent = getMoneySpent(keyboards, drives, s);
+    cout << moneySpent << endl;
+    return 0;
+}
