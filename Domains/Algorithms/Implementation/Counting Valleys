@@ -1,0 +1,32 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int n, one = 0, two = 0, valleys = 0;
+    cin >> n;
+    string str;
+    cin >> str;
+    char tracked;
+    for(int i = 0; i < str.length(); i++) {
+        if(one == two) {
+            tracked = str.at(i);
+            one = 0;
+            two = 0;
+        }
+        if(str.at(i) == 'U') {
+            one++;
+        } else {
+            two++;
+        }
+        if(one == two && tracked == 'D') {
+            valleys++;
+        }
+    }
+    cout<<valleys<<endl;
+    return 0;
+}
