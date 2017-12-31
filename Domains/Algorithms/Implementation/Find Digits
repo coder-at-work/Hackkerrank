@@ -1,0 +1,25 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        int n, x, count = 0;
+        cin >> n;
+        x = n;
+        while(x != 0) {
+            int rem = x % 10;
+            x = x / 10;
+            if(rem != 0 && (n % rem) == 0) {
+                count++;
+            }
+        }
+        cout<<count<<endl;
+    }
+    return 0;
+}
