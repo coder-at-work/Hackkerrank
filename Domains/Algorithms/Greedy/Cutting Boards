@@ -1,0 +1,54 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define MOD 1000000007
+using namespace std;
+
+
+int main() {  
+    int query;
+    cin>>query;
+    while(query--) {
+        int m, n;
+        long long int hCut = 0, vCut = 0, costVCut, costHCut, totalCost = 0;
+        cin>>m>>n;
+        m--;
+        n--;
+        long long int arrX[n], arrY[m];
+        for(int i = 0; i < m; i++) {
+            cin>>arrY[i];
+        }
+        for(int i = 0; i < n; i++) {
+            cin>>arrX[i];
+        }
+        sort(arrX, arrX + n, greater <int>());
+        sort(arrY, arrY + m, greater <int>());
+        int i = 0, j = 0;
+        while(i < m && j < n) {
+            if(arrX[j] >= arrY[i]) {
+                totalCost = (totalCost%MOD + ((hCut + 1)*arrX[j])%MOD)%MOD;
+                vCut++;
+                j++;
+            } else {
+                totalCost = (totalCost%MOD + ((vCut + 1)*arrY[i])%MOD)%MOD;
+                hCut++;
+                i++;
+            }
+        }
+        while(i < m) {
+            costHCut = (vCut + 1) * arrY[i];
+            totalCost = (totalCost%MOD + ((vCut + 1)*arrY[i])%MOD)%MOD;
+            hCut++;
+            i++;
+        }
+        while(j < n) {
+            totalCost = (totalCost%MOD + ((hCut + 1) * arrX[j])%MOD)%MOD;
+            vCut++;
+            j++;
+        }
+        cout<<totalCost<<endl;
+    }
+    return 0;
+}
