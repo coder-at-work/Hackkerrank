@@ -1,0 +1,60 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <map>
+#include <stack>
+#include <climits>
+using namespace std;
+struct Data
+{
+    long long int row, c1, c2;
+};
+
+bool sortByRow(Data d1, Data d2) {
+    return(d1.c1 < d2.c1);
+}
+
+
+int main() {
+    long long int n, m, k, r, c_i, c_j;
+    cin>>n>>m>>k;
+    Data entry[k];
+    for(int i = 0; i < k; i++) {
+        cin>>entry[i].row>>entry[i].c1>>entry[i].c2;
+    }
+    sort(entry, entry + k, sortByRow);
+    map <int, stack<Data>>store;
+    map <int, stack<Data>> :: iterator itr;
+    for(int i = 0; i < k; i++) {
+        r = entry[i].row, c_i = entry[i].c1, c_j = entry[i].c2;
+        if(store.find(r) != store.end()) {
+            Data top_element = store[r].top();
+            if(c_i > top_element.c2) {
+                store[r].push(entry[i]);
+            } else if(c_i >= top_element.c1 && c_j <= top_element.c2) {
+                continue;
+            } else {
+                top_element.c2 = c_j;
+                store[r].pop();
+                store[r].push(top_element);
+            }
+        } else {
+            store[r].push(entry[i]);
+        }
+    }
+    long long int tracks = 0, total = n*m, ans = 0;
+    for(itr = store.begin(); itr != store.end(); itr++) {
+        r = itr->first;
+        while(!store[r].empty()) {
+            Data top_element = store[r].top();
+            tracks += (top_element.c2 - top_element.c1 + 1);
+            //cout<<top_element.c1<<" "<<top_element.c2<<endl;
+            store[r].pop();
+        }
+        //cout<<endl;
+    }
+    ans = total - tracks;
+    cout<<ans<<endl;
+}
