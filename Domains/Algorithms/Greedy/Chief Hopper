@@ -1,0 +1,22 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int noBuildings, botEnergy;
+    cin>>noBuildings;
+    int heights[noBuildings];
+    for(int i = 0; i < noBuildings; i++) {
+        cin>>heights[i];
+    }
+    botEnergy = 0;
+    for(int i = noBuildings - 2; i >=-1; i--) {
+        botEnergy = ceil((botEnergy + heights[i + 1])/2.0);
+    }
+    cout<<botEnergy<<endl;
+    return 0;
+}
