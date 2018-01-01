@@ -1,0 +1,47 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main(){
+    int t;
+    cin >> t;
+    for(int a0 = 0; a0 < t; a0++){
+        int n, flag = 0;
+        cin >> n;
+        if((n % 3) == 0) {
+            flag = 1;
+            for(int i = 0; i < n; i++) {
+                cout<<"5";
+            } 
+        } else {
+            int num = 5, k = 1;
+            while((n - num) >= 3 && ((n - num) % 3) != 0 ) {
+                k++;
+                num *= k;
+            }
+            if((n - num) >= 3) {
+                flag = 1;
+                for(int i = 0; i < (n - num); i++) {
+                    cout<<"5";
+                }
+                for(int i = 0; i < num; i++) {
+                    cout<<"3";
+                }
+            }
+        }
+        if(!flag && ((n % 5) == 0)) {
+            for(int i = 0; i < n; i++) {
+                cout<<"3";
+            }
+        } else if(flag != 1){
+            cout<<"-1";
+        }
+        cout<<endl;
+      } 
+    return 0;
+}
+           
