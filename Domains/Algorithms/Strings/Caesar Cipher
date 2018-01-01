@@ -1,0 +1,35 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    string s, answer = "";
+    cin >> s;
+    int k;
+    cin >> k;
+    for(int i = 0; i < s.length(); i++) {
+        char ch = s.at(i);
+        k = k % 26;
+        if(s.at(i) >= 'a' && s.at(i) <= 'z') {
+            int x = s.at(i) + k;
+            ch = x;
+            if(x > 122) {
+                ch = 96 + (x % 122);
+            }
+        } else if(s.at(i) >= 'A' && s.at(i) <= 'Z') {
+            int x = s.at(i) + k;
+            ch = x;
+            if(x > 90) {
+                ch = 64 + (x % 90);
+            }            
+        }
+        answer += ch;
+    }
+    cout<<answer<<endl;
+    return 0;
+}
