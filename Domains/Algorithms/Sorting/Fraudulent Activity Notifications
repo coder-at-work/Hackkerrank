@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int calculateExactNumber(int occurences[], int mid) {
+    int k = 0, ans;
+    while(mid >= 0) {
+        mid -= occurences[k];
+        k++;
+    }
+    if(mid == 0) {
+        for(int i = k; i < 201; i++) {
+            if(occurences[i] > 0) {
+                ans = k;
+                break;
+            }
+        }
+    } else if(mid < 0) {
+        ans = --k;
+    }
+    return(ans);
+}
+
+int activityNotifications(vector <int> expenditure, int d) {
+    int occurences[201], mid, notifications = 0, start = 0, median;
+    for(int i = 0; i < 201; i++) {
+        occurences[i] = 0;
+    }
+    for(int i = 0; i < d; i++) {
+        occurences[expenditure[i]]++;
+    }
+    mid = (start + d)/2;
+    for(int i = d; i < expenditure.size(); i++) {
+        if((d % 2) == 1) {
+            median = calculateExactNumber(occurences, mid);
+            if(expenditure[i] >= (2*median)) {
+                notifications++;
+            }
+        } else {
+            int a = calculateExactNumber(occurences, mid), b = calculateExactNumber(occurences, mid - 1);
+            median = (a + b);
+            if(expenditure[i] >= median) {
+                notifications++;
+            }
+        }
+        occurences[expenditure[i]]++;
+        if(occurences[expenditure[start]] > 0)
+            occurences[expenditure[start]]--;
+        start++;
+    }
+    return(notifications);
+}
+
+int main() {
+    int n;
+    int d;
+    cin >> n >> d;
+    vector<int> expenditure(n);
+    for(int expenditure_i = 0; expenditure_i < n; expenditure_i++){
+       cin >> expenditure[expenditure_i];
+    }
+    int result = activityNotifications(expenditure, d);
+    cout << result << endl;
+    return 0;
+}
