@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int toys(vector <int> w) {
+    sort(w.begin(), w.end());  
+    int i = 0, first, second, count = 0, noUnits = 0;
+    vector <int> :: iterator start, end, it;
+    while(i < w.size()) {
+        count = 0;
+        noUnits++;
+        first = w[i];
+        second = first + 4;
+        start = lower_bound(w.begin(), w.end(), first);
+        end = upper_bound(w.begin(), w.end(), second);
+        for(it = start; it != end; it++) {
+            count++;
+        }
+        i += count;
+    }
+    return(noUnits);
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> w(n);
+    for(int w_i = 0; w_i < n; w_i++){
+       cin >> w[w_i];
+    }
+    int result = toys(w);
+    cout << result << endl;
+    return 0;
+}
