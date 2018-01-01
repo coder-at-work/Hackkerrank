@@ -1,0 +1,45 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int test;
+    cin>>test;
+    while(test--) {
+        int n, flag = 0;
+        cin>>n;
+        char ch;
+        vector < vector<char> >input;
+        for(int i = 0; i < n; i++) {
+            vector <char>row;
+            for(int j = 0; j < n; j++) {
+                cin>>ch;
+                row.push_back(ch);
+            }
+            input.push_back(row);
+        }
+        for(int i = 0; i < n; i++) {
+            sort(input[i].begin(), input[i].end());
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n - 1; j++) {
+                if(input[j][i] <= input[j + 1][i]) {
+                    continue;
+                } else {
+                    flag = 1;
+                    break;
+                }
+            }
+        }
+        if(flag == 1) {
+            cout<<"NO\n";
+        } else {
+            cout<<"YES\n";
+        }
+    }
+    return 0;
+}
