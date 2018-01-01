@@ -1,0 +1,50 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define MOD 1000000007
+using namespace std;
+
+
+int main() {
+    int arr1[26], arr2[26][26], arr3[26][26][26], arr4[26][26][26][26], ch, ans = 0;
+    for(int i = 0; i < 26; i++) {
+        arr1[i] = 0;
+    }
+    for(int i = 0; i < 26; i++) {
+        for(int j = 0; j < 26; j++) {
+            arr2[i][j] = 0;
+        }
+    }
+    for(int i = 0; i < 26; i++) {
+        for(int j = 0; j < 26; j++) {
+            for(int k = 0; k < 26; k++) {
+                arr3[i][j][k] = 0;
+            }
+        }
+    }
+    for(int i = 0; i < 26; i++) {
+        for(int j = 0; j < 26; j++) {
+            for(int k = 0; k < 26; k++) {
+                for(int l = 0; l < 26; l++) {
+                    arr4[i][j][k][l] = 0;
+                }
+            }
+        }
+    }
+    string input;
+    cin>>input;
+    for(int i = 0 ; i < input.length(); i++) {
+        ch = (int)(input.at(i) - 'a');
+        for(int j = 0; j < 26; j++) {
+            arr4[ch][j][j][ch] = (arr3[ch][j][j]);
+            arr3[j][ch][ch] = (arr3[j][ch][ch] + arr2[j][ch]) % MOD;
+            arr2[j][ch] = (arr2[j][ch] + arr1[j]) % MOD;
+            ans = (ans + arr4[ch][j][j][ch]) % MOD;
+        }
+        arr1[ch] = (arr1[ch] % MOD + 1) % MOD;
+    }
+    cout<<ans<<endl;
+    return 0;
+}
