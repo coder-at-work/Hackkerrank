@@ -1,0 +1,35 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    int n, k, x;
+    cin>>n>>k;
+    int index[n], value[n], finalArr[n];
+    for(int i = 0; i < n ; i++) {
+        cin>>x;
+        index[x] = i;
+        value[i] = x;
+    }
+    int start = n, i = 0;
+    while(start != 1 &&  k > 0) {
+        if(index[start] != i) {
+            int temp = value[i];
+            value[i] = start;
+            value[index[start]] = temp;
+            index[temp] = index[start];
+            k--;
+        }
+        start--;
+        i++;
+    } 
+    for(int i = 0; i < n ; i++) {
+        cout<<value[i]<<' ';
+    }
+    cout<<endl;
+    return 0;
+}
