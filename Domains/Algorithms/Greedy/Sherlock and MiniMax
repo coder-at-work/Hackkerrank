@@ -1,0 +1,61 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+
+int main() {
+    int n, p, q, x;
+    cin>>n;
+    vector <int>v;
+    int middleElement, minDistMiddleElement, maxAmongVectorElements, maxValue = -1, minVal = INT_MAX, answer;
+    for(int i = 0; i < n; i++) {
+        cin>>x;
+        v.push_back(x);
+    }
+    cin>>p>>q;
+    
+    //Sort the vector
+    sort(v.begin(), v.end());
+    
+    for(int i = 1; i < n; i++) {
+        middleElement = (v[i] + v[i-1])/2;
+        if(middleElement >= p && middleElement <= q) {
+            minDistMiddleElement = min(middleElement - v[i - 1], v[i] - middleElement);
+            if(minDistMiddleElement > maxValue) {
+                maxValue = minDistMiddleElement;
+                answer = middleElement;
+            }
+        }
+    }
+    
+    for(int i = 0; i < n; i++) {
+        int diff = abs(v[i] - p);
+        if(diff < minVal) {
+            minVal = diff;
+        }
+    }
+    if(minVal >= maxValue) {
+        maxValue = minVal;
+        answer = p;
+    }
+    
+    minVal = INT_MAX;
+    for(int i = 0; i < n; i++) {
+        int diff = abs(v[i] - q);
+        if(diff < minVal) {
+            minVal = diff;
+        }
+    }
+    if(minVal > maxValue) {
+        maxValue = minVal;
+        answer = q;
+    }
+    
+    cout<<answer<<endl;
+    
+    return 0;
+}
