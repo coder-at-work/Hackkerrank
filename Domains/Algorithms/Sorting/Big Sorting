@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool sortStringArray(string x, string y) {
+    int lenX = x.length(), lenY = y.length();
+    if(lenX == lenY) {
+        return(x < y);
+    }
+    return(lenX < lenY);
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<string> unsorted(n);
+    for(int unsorted_i = 0; unsorted_i < n; unsorted_i++){
+       cin >> unsorted[unsorted_i];
+    }
+    sort(unsorted.begin(), unsorted.end(), sortStringArray);
+    for(int i = 0; i < n; i++) {
+        cout<<unsorted[i]<<endl;
+    }
+    return 0;
+}
