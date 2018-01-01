@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string solve(vector < int > a, int totalSum){
+    int sum = 0, reverseSum = totalSum, len = a.size();
+    for(int i = 0; i < len; i++) {
+        sum += a[i];
+        if(sum == reverseSum) {
+            return("YES");
+        }
+        reverseSum -= a[i];
+    }
+    return("NO");
+}
+
+int main() {
+    int T;
+    cin >> T;
+    for(int a0 = 0; a0 < T; a0++){
+        int n, sum = 0;
+        cin >> n;
+        vector<int> a(n);
+        for(int a_i = 0; a_i < n; a_i++){
+           cin >> a[a_i];
+           sum += a[a_i];
+        }
+        string result = solve(a, sum);
+        cout << result << endl;
+    }
+    return 0;
+}
