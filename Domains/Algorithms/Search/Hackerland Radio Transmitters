@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int hackerlandRadioTransmitters(vector <int> x, int k) {
+    sort(x.begin(), x.end());
+    int start = 0, count = 0;
+    while(start < x.size()) {
+        int i = start + 1;
+        while(i < x.size() && (x[i] - x[start]) <= k) {
+            i++;
+        }
+        i--;
+        int j = i + 1;
+        while(j < x.size() && (x[j] - x[i]) <= k) {
+            j++;
+        }
+        j--;
+        count++;
+        start = j + 1;
+    }
+    return(count);
+}
+
+int main() {
+    int n;
+    int k;
+    cin >> n >> k;
+    vector<int> x(n);
+    for(int x_i = 0; x_i < n; x_i++){
+       cin >> x[x_i];
+    }
+    int result = hackerlandRadioTransmitters(x, k);
+    cout << result << endl;
+    return 0;
+}
