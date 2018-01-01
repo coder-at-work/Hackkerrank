@@ -1,0 +1,39 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+struct Order {
+    int orderNo;
+    int orderTime;
+    int processTime;
+    int completionTime;
+};
+
+bool sortOnCompletionTime(Order o1, Order o2) {
+    if(o1.completionTime == o2.completionTime) {
+        return(o1.orderNo < o2.orderNo);
+    }
+    return(o1.completionTime < o2.completionTime);
+}
+
+int main() {
+    int n;
+    cin>>n;
+    vector <Order>times;
+    for(int i = 0; i < n; i++) {
+        Order o;
+        o.orderNo = i + 1;
+        cin>>o.orderTime>>o.processTime;
+        o.completionTime = o.orderTime + o.processTime;
+        times.push_back(o);
+    }
+    sort(times.begin(), times.end(), sortOnCompletionTime);
+    for(int i = 0; i < n; i++) {
+        cout<<times[i].orderNo<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
