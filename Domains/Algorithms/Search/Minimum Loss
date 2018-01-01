@@ -1,0 +1,29 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <set>
+using namespace std;
+
+int main() {
+    int n;
+    long long int x, mn = 10000000000000001LL, mx = -1;
+    cin>>n;
+    long long int arr[n];
+    set<long long int> v;
+    for(int i = 0; i < n; i++) {
+        cin>>arr[i];
+    }
+    for(int i = 0; i < n; i++) {
+        mx = max(mx, arr[i]);
+        if(mx > arr[i]) {
+            long long int ub = *v.upper_bound(arr[i]);
+            mn = min(mn, ub - arr[i]);
+        }
+        v.insert(arr[i]);
+    }
+    cout<<mn<<endl;
+
+    return 0;
+}
