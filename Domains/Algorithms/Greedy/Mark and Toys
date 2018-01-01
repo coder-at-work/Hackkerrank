@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int maximumToys(vector <int> prices, int k) {
+    sort(prices.begin(), prices.end());
+    int noToys = 0, spentMoney = 0;
+    while(noToys < prices.size()) {
+        spentMoney += prices[noToys];
+        if(spentMoney > k) {
+            break;
+        }
+        noToys++;
+    }
+    return(noToys);
+}
+
+int main() {
+    int n;
+    int k;
+    cin >> n >> k;
+    vector<int> prices(n);
+    for(int prices_i = 0; prices_i < n; prices_i++){
+       cin >> prices[prices_i];
+    }
+    int result = maximumToys(prices, k);
+    cout << result << endl;
+    return 0;
+}
